@@ -5,14 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modelo 3D en AR</title>
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        model-viewer {
+            width: 300px;  /* Ajusta el ancho */
+            height: 300px; /* Ajusta la altura */
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            /* Asegúrate de que el modelo se ajuste bien */
+            max-width: 100%; /* Limita el tamaño al ancho de la pantalla */
+            max-height: 100%; /* Limita el tamaño al alto de la pantalla */
+        }
+    </style>
 </head>
 <body>
-<model-viewer src="https://modelviewer.dev/shared-assets/models/Astronaut.glb" 
-              alt="Un astronauta en AR" 
-              auto-rotate 
-              camera-controls 
-              ar 
-              ar-modes="webxr scene-viewer quick-look">
-</model-viewer>
+    <model-viewer id="model" 
+                  alt="Modelo 3D" 
+                  auto-rotate 
+                  camera-controls 
+                  ar 
+                  ar-modes="webxr scene-viewer quick-look" 
+                  src="">
+    </model-viewer>
+    <script>
+        const modelViewer = document.getElementById('model');
+        const modelMap = {
+            "AGUILA": "AGUILA.glb",
+            "ANDINA": "ANDINA.glb",
+            "BUD": "BUD.glb",
+            "BUDLIGHT": "BUDLIGHT.glb",
+            "CLUB": "CLUB.glb",
+            "HEINE": "HEINE.glb",
+            "CORONA": "CORONA.glb",
+            "POKER": "POKER.glb"
+        };
+
+        function loadModel() {
+            const path = window.location.pathname.replace('/', '');
+            const modelFile = modelMap[path] || 'AGUILA.glb'; // Cargar un modelo por defecto si no se encuentra
+            modelViewer.src = modelFile;
+        }
+
+        loadModel();
+    </script>
 </body>
 </html>
