@@ -26,17 +26,21 @@
     <model-viewer id="model" alt="Modelo 3D" auto-rotate camera-controls></model-viewer>
     <script>
         const modelViewer = document.getElementById('model');
+        const modelMap = {
+            "AGUILA": "AGUILA.glb",
+            "ANDINA": "ANDINA.glb",
+            "BUD": "BUD.glb",
+            "BUDLIGHT": "BUDLIGHT.glb",
+            "CLUB": "CLUB.glb",
+            "HEINE": "HEINE.glb",
+            "CORONA": "CORONA.glb",
+            "POKER": "POKER.glb"
+        };
+
         const path = window.location.pathname.replace('/', '');
-        
-        // Modelos disponibles
-        const models = ['AGUILA', 'ANDINA', 'BUD', 'BUDLIGHT', 'CLUB', 'HEINE', 'CORONA', 'POKER'];
-        
-        // Cargar el modelo correspondiente o un modelo por defecto
-        if (models.includes(path)) {
-            modelViewer.src = `${path}.glb`;
-        } else {
-            modelViewer.src = 'AGUILA.glb'; // Cargar un modelo por defecto si no se encuentra
-        }
+        const modelFile = modelMap[path] || 'AGUILA.glb'; // Cargar un modelo por defecto si no se encuentra
+
+        modelViewer.src = modelFile;
     </script>
 </body>
 </html>
